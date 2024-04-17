@@ -27,9 +27,32 @@ app.get('/dog', (req, res) => {
 
 // 당연히 json 정보를 보내줄 수도 있다. send 대신 json 이라고 명시해주면 과정이 더 짧아진다.
 
+// 주소 사이트에는 한글이 들어가면 안된다. 그래서 한글을 영어, 숫자, 특수문자가 섞인 문자로 변환해줘야하는데, 이 과정을 인코딩 이라고 한다.
+
 app.get('/cat', (req, res) => {
   res.send('냥~')
 })
+
+// GET 통신 : 주소창을 이용하는 방식 1. parameter = params 사용 2. query 사용 하는 방법이 있다.
+
+// 1. parameter : 변수를 받는 방법의 코드
+app.get('/user/:id', (req, res) => {
+  // 요청 들어온 것의 parameter 를 받아서 q 라는 변수 안에 넣는다.
+  const p = req.params
+  console.log(p.id)
+  // id 라는 변수의 request 요청이 id의 값으로 들어간다. 즉, 콜론 (:) 을 쓰고 변수 명을 작성해주면 그 값이 들어온다.
+  res.json({'userid': p.id})
+})
+
+
+// 2. query : 물음표 (?) 작성 후 key value 구조로 입력
+app.get('/user/:id', (req, res) => {
+  const q = req.query
+  console.log(q.q)
+  console.log(q.name)
+  res.json({'userid': q.id})
+})
+
 
 // 3000번을 듣고있을 때 실행
 app.listen(port, () => {
