@@ -1,6 +1,10 @@
 const express = require('express')
+var cors = require('cors')
 const app = express()
 const port = 3000
+
+// cors 조건 설정 가능 - 빈칸 : 모든 요청 허용
+app.use(cors())
 
 // app.HTTP메소드('/라우팅', 콜백함수)
 app.get('/', (req, res) => {
@@ -91,7 +95,8 @@ app.get('/sound/:name', (req, res) => {
 
 
 
-
+// CORS : HTML 파일에서 어떤 서버로 요청을 했을 때 보안 상의 문제가 있을 수도 있어서 기본적으로 막는다. 그 요청을 받아주게? 하는 게 CORS 인데, HTML 로 요청하는 것은 CORS 가 없으면 차단되는 경우도 있다.
+// 다른 서버에서 요청하더라도 받아주는 그런것들이 필요하다. 그래야 프론트와 소통을 할 수 있겠죠?
 
 
 // 3000번을 듣고있을 때 실행
