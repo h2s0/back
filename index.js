@@ -33,6 +33,8 @@ app.get('/cat', (req, res) => {
   res.send('냥~')
 })
 
+
+
 // GET 통신 : 주소창을 이용하는 방식 1. parameter = params 사용 2. query 사용 하는 방법이 있다.
 
 // 1. parameter : 변수를 받는 방법의 코드
@@ -52,6 +54,44 @@ app.get('/user/:id', (req, res) => {
   console.log(q.name)
   res.json({'userid': q.id})
 })
+
+
+
+// POST 통신 : POST 는 주소창으로 요구하는게 아니라 axios, fetch 를 이용할 때 사용할 수 있다.
+// body 라는 곳에 값이 담겨야 한다.
+app.use(express.json())
+app.post('/user/:id', (req, res) => {
+  const p = req.params;
+  console.log(p);
+  const b = req.body;
+  console.log(b);
+
+  res.send({ 'message' : 'Hello world!' })
+})
+
+// params 를 받아서 받은 데이터 기반으로 처리할 수 있다.
+// name 에 따라서 다른 울음소리를 출력하는 api 를 만들어보자!
+app.get('/sound/:name', (req, res) => {
+  const { name } = req.params
+  
+  if (name == "dog") {
+    res.json({'sound' : '멍멍'})
+  } else if (name == "cat") {
+    res.json({'sound' : '냥'})
+  } else if (name == "pig") {
+    res.json({'sound' : '꿀꿀ㄹ'})
+  }
+  else {
+    res.json({'sound' : 'unknown'})
+  }
+  console.log(name)
+
+  res.json({ 'sound' : '야옹' })
+})
+
+
+
+
 
 
 // 3000번을 듣고있을 때 실행
